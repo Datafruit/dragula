@@ -140,7 +140,7 @@ function dragula (initialContainers, options) {
     eventualMovements(true);
     movements();
     end();
-    start(grabbed);
+    start(grabbed, e);
 
     var offset = getOffset(_item);
     _offsetX = getCoord('pageX', e) - offset.left;
@@ -198,7 +198,7 @@ function dragula (initialContainers, options) {
     }
   }
 
-  function start (context) {
+  function start (context, e) {
     if (isCopy(context.item, context.source)) {
       _copy = context.item.cloneNode(true);
       drake.emit('cloned', _copy, context.item, 'copy');
@@ -209,7 +209,7 @@ function dragula (initialContainers, options) {
     _initialSibling = _currentSibling = nextEl(context.item);
 
     drake.dragging = true;
-    drake.emit('drag', _item, _source);
+    drake.emit('drag', _item, _source, e);
   }
 
   function invalidTarget () {
@@ -242,7 +242,7 @@ function dragula (initialContainers, options) {
     var elementBehindCursor = getElementBehindPoint(_mirror, clientX, clientY);
     var dropTarget = findDropTarget(elementBehindCursor, clientX, clientY);
     if (dropTarget && ((_copy && o.copySortSource) || (!_copy || dropTarget !== _source))) {
-      drop(item, dropTarget);
+      drop(item, dropTarget, e);
     } else if (o.removeOnSpill) {
       remove();
     } else {
@@ -250,7 +250,7 @@ function dragula (initialContainers, options) {
     }
   }
 
-  function drop (item, target) {
+  function drop (item, target, e) {
     var parent = getParent(item);
     if (_copy && o.copySortSource && target === _source) {
       parent.removeChild(_item);
@@ -258,7 +258,7 @@ function dragula (initialContainers, options) {
     if (isInitialPlacement(target)) {
       drake.emit('cancel', item, _source, _source);
     } else {
-      drake.emit('drop', item, target, _source, _currentSibling);
+      drake.emit('drop', item, target, _source, _currentSibling, e);
     }
     cleanup();
   }

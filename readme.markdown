@@ -1,3 +1,6 @@
+# sugo-dragula
+it is a custom build of `dragula` with some modification
+
 [![logo.png][3]][2]
 
 [![Travis CI][5]][4] [![Slack Status][17]][18] [![Support](https://supporter.60devs.com/api/b/f4co3kmopd9mngbzjgn6ymbug)](https://supporter.60devs.com/give/f4co3kmopd9mngbzjgn6ymbug) [![Patreon][19]][20]
@@ -272,7 +275,7 @@ Event Name | Listener Arguments               | Event Description
 -----------|----------------------------------|-------------------------------------------------------------------------------------
 `drag`     | `el, source`                     | `el` was lifted from `source`
 `dragend`  | `el`                             | Dragging event for `el` ended with either `cancel`, `remove`, or `drop`
-`drop`     | `el, target, source, sibling`    | `el` was dropped into `target` before a `sibling` element, and originally came from `source`
+`drop`     | `el, target, source, sibling, e` | `el` was dropped into `target` before a `sibling` element, and originally came from `source`
 `cancel`   | `el, container, source`          | `el` was being dragged but it got nowhere and went back into `container`, its last stable parent; `el` originally came from `source`
 `remove`   | `el, container, source`          | `el` was being dragged but it got nowhere and it was removed from the DOM. Its last stable parent was `container`, and originally came from `source`
 `shadow`   | `el, container, source`          | `el`, _the visual aid shadow_, was moved into `container`. May trigger many times as the position of `el` changes, even within the same `container`; `el` originally came from `source`
